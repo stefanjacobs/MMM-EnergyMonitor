@@ -10,12 +10,12 @@ Module.register("MMM-EnergyMonitor", {
     defaults: {
         name: "MMM-EnergyMonitor",
         hidden: false,
-        updateInterval: 3000,
+        updateInterval: 2500,
         energyStorage: true,
         width: "600px",
         height: "500px",
         lineWidth: "7px",
-        resetCycles: 4,
+        resetCycles: 120,
         logNotifications: false,
         wattConversionOptions: {
             enabled: true,
@@ -62,7 +62,7 @@ Module.register("MMM-EnergyMonitor", {
     trackValueReset: function() {
         for (const dataType in this.resetCounter) {
             if (this.resetCounter.hasOwnProperty(dataType)) {
-                
+
                 if(this.resetCounter[dataType] === this.config.resetCycles) {
                     this.currentData[dataType] = 0;
                     this.resetCounter[dataType] = 0;
@@ -141,12 +141,13 @@ Module.register("MMM-EnergyMonitor", {
     generateSolarLine: function() {
         const solarLine = document.createElement("div");
         solarLine.classList.add("line", "horizontal", "left");
-        
+
         const solarLabel = document.createElement("div");
         solarLabel.id = "solar-label";
         solarLabel.classList.add("label");
         solarLabel.innerHTML = `${this.getWattString(this.currentData.solar)} <br>`;
         solarLabel.innerHTML += this.translate("SOLAR_PRODUCING");
+        solarLabel.classList.add("green");
         solarLine.appendChild(solarLabel);
 
         if(this.currentData.solar > 0) {
@@ -166,7 +167,7 @@ Module.register("MMM-EnergyMonitor", {
         this.calculateHomeConsumption();
         const homeLine = document.createElement("div");
         homeLine.classList.add("line", "vertical", "up");
-        
+
         const homeLabel = document.createElement("div");
         homeLabel.id = "home-label";
         homeLabel.classList.add("label");
@@ -190,7 +191,7 @@ Module.register("MMM-EnergyMonitor", {
     generateGridLine: function() {
         const gridLine = document.createElement("div");
         gridLine.classList.add("line", "horizontal", "right");
-                
+
         if(this.currentData.grid !== 0)
             gridLine.classList.add("active");
 
@@ -203,14 +204,14 @@ Module.register("MMM-EnergyMonitor", {
         // Positive value means feeding to grid
         if(this.currentData.grid > 0) {
             gridLabel.innerHTML += this.translate("GRID_BACKFEEDING");
-            gridLabel.classList.add("font-green");
+            gridLabel.classList.add("green");
 
             const gridArrowOut = document.createElement("div");
             gridArrowOut.classList.add("arrow", "right", "active");
             gridLine.appendChild(gridArrowOut);
         } else if(this.currentData.grid < 0) {
             gridLabel.innerHTML += this.translate("GRID_CONSUMPTION");
-            gridLabel.classList.add("font-red");
+            gridLabel.classList.add("red");
 
             const gridArrowIn = document.createElement("div");
             gridArrowIn.classList.add("arrow", "left", "active");
@@ -266,9 +267,9 @@ Module.register("MMM-EnergyMonitor", {
     getWattString: function (value) {
         const wattConversionOptions = this.config.wattConversionOptions;
         if (wattConversionOptions.enabled && value > wattConversionOptions.threshold) {
-          return `${(value / 1000).toFixed(wattConversionOptions.numDecimalDigits)} KW`;
+            return `${(value / 1000).toFixed(wattConversionOptions.numDecimalDigits)} kW`;
         }
-    
+
         return `${Math.round(value)} W`;
     },
 
@@ -288,12 +289,12 @@ Module.register("MMM-EnergyMonitor", {
         if(typeof payload !== "number") {
             if(this.logNotifications)
                 Log.info(`EnergyMonitor received data that is NaN: ${payload} from sender: ${sender.name} via notification: ${notification}`);
-            
+
             return false;
         } else {
             if(this.logNotifications)
                 Log.info(`EnergyMonitor received data: ${payload} from sender: ${sender.name} via notification: ${notification}`);
-            
+
             return true;
         }
     },
@@ -301,7 +302,7 @@ Module.register("MMM-EnergyMonitor", {
     notificationReceived(notification, payload, sender) {
         if(!this.loaded)
             return;
-        
+
         // Unit: Watt | negative: discharge | positive: charge
         if (notification === "MMM-EnergyMonitor_ENERGY_STORAGE_POWER_UPDATE") {
             if(!this.validateNumberPayload(notification, payload, sender))

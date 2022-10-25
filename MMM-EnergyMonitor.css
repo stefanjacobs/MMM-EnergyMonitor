@@ -25,28 +25,32 @@
   background-color: var(--color-background);
 }
 
-.hidden {
+.MMM-EnergyMonitor .hidden {
   display: none;
 }
 
-.active {
+.MMM-EnergyMonitor .dimmed {
+  display: none;
+}
+
+.MMM-EnergyMonitor .active {
   color: #FFE377;
   background-color: #FFE377;
 }
 
-.font-green {
-  color: #CDEE69;
+.MMM-EnergyMonitor div.green {
+  color: #00da1d;
 }
 
-.font-red {
-  color: #E09690;
+.MMM-EnergyMonitor div.red {
+  color: #df652d;
 }
 
 /* ****************************************
 *    Icons
 * ****************************************/
 
-.icon {
+.MMM-EnergyMonitor .icon {
   position: absolute;
   font-size: var(--icon-size);
   color: var(--default-color);
@@ -54,27 +58,27 @@
   text-align: center;
 }
 
-.icon.horizontal {
+.MMM-EnergyMonitor .icon.horizontal {
   top: calc(var(--vertical-center) - (var(--icon-size) / 2));
 }
 
-.icon.vertical {
+.MMM-EnergyMonitor .icon.vertical {
   left: calc(var(--horizontal-center) - (var(--icon-size) / 2));
 }
 
-.icon.top {
+.MMM-EnergyMonitor .icon.top {
   top: -4px;
 }
 
-.icon.bottom {
+.MMM-EnergyMonitor .icon.bottom {
   bottom: -3px;
 }
 
-.icon.left {
+.MMM-EnergyMonitor .icon.left {
   left: 0px;
 }
 
-.icon.right {
+.MMM-EnergyMonitor .icon.right {
   right: 0px;
 }
 
@@ -82,7 +86,7 @@
 *    Labels
 * ****************************************/
 
-.label {
+.MMM-EnergyMonitor .label {
   position: absolute;
   color: var(--default-color);
   font-family: var(--font-primary);
@@ -122,15 +126,15 @@
 *    Lines
 * ****************************************/
 
-.line {
+.MMM-EnergyMonitor .line {
   background-color: var(--default-color);
 }
 
-.line.active {
+.MMM-EnergyMonitor .line.active {
   background-color: var(--active-color);
 }
 
-.line.vertical {
+.MMM-EnergyMonitor .line.vertical {
   width: var(--line-width);
   height: var(--vertical-line-length);
   left: calc(var(--horizontal-center) - (var(--line-width) / 2));
@@ -138,29 +142,29 @@
   position: relative;
 }
 
-.line.vertical.up {
+.MMM-EnergyMonitor .line.vertical.up {
   position: absolute;
   top: var(--line-margin);
 }
 
-.line.vertical.down {
+.MMM-EnergyMonitor .line.vertical.down {
   position: absolute;
   bottom: var(--line-margin);
 }
 
-.line.horizontal {
+.MMM-EnergyMonitor .line.horizontal {
   width: var(--horizontal-line-length);
   height: var(--line-width);
   top: calc(var(--vertical-center) - (var(--line-width) / 2));
   border-radius: var(--line-border-radius);
 }
 
-.line.horizontal.left {
+.MMM-EnergyMonitor .line.horizontal.left {
   position: absolute;
   left: var(--line-margin);
 }
 
-.line.horizontal.right {
+.MMM-EnergyMonitor .line.horizontal.right {
   position: absolute;
   right: var(--line-margin);
 }
@@ -170,7 +174,7 @@
 * ****************************************/
 
 
-.arrow {
+.MMM-EnergyMonitor .arrow {
   --arrow-line-distance: calc(-1 * var(--arrow-size) + 3px);
   --arrow-line-centering: calc(-1 * (var(--arrow-size) / 2) + (var(--line-width) / 2));
   width: var(--arrow-size);
@@ -179,32 +183,32 @@
   content: url("img/caret-down.svg");
 }
 
-.arrow.active {
+.MMM-EnergyMonitor .arrow.active {
   filter: invert(94%) sepia(68%) saturate(714%) hue-rotate(323deg) brightness(102%) contrast(101%);
 }
 
-.arrow.right {
+.MMM-EnergyMonitor .arrow.right {
   position: absolute;
   transform: rotate(-90deg);
   right: var(--arrow-line-distance);
   top: var(--arrow-line-centering);
 }
 
-.arrow.left {
+.MMM-EnergyMonitor .arrow.left {
   position: absolute;
   transform: rotate(90deg);
   left: var(--arrow-line-distance);
   top: var(--arrow-line-centering);
 }
 
-.arrow.up {
+.MMM-EnergyMonitor .arrow.up {
   position: absolute;
   transform: rotate(180deg);
   top: var(--arrow-line-distance);
   left: var(--arrow-line-centering);
 }
 
-.arrow.down {
+.MMM-EnergyMonitor .arrow.down {
   position: absolute;
   bottom: var(--arrow-line-distance);
   left: var(--arrow-line-centering);
