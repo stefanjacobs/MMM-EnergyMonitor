@@ -287,12 +287,12 @@ Module.register("MMM-EnergyMonitor", {
 
     validateNumberPayload(notification, payload, sender, ) {
         if(typeof payload !== "number") {
-            if(this.logNotifications)
-                Log.info(`EnergyMonitor received data that is NaN: ${payload} from sender: ${sender.name} via notification: ${notification}`);
+            if(this.config.logNotifications)
+                Log.info(`EnergyMonitor received data that is NaN (${typeof payload}): ${payload} from sender: ${sender.name} via notification: ${notification}`);
 
             return false;
         } else {
-            if(this.logNotifications)
+            if(this.config.logNotifications)
                 Log.info(`EnergyMonitor received data: ${payload} from sender: ${sender.name} via notification: ${notification}`);
 
             return true;
