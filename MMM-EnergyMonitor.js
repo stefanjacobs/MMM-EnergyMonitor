@@ -274,7 +274,7 @@ Module.register("MMM-EnergyMonitor", {
     },
 
     getStyles: function () {
-        return ["MMM-EnergyMonitor.css", "fontawesome.css"];
+        return ["MMM-EnergyMonitor.css", "font-awesome.css"];
     },
 
     // Load translations files
